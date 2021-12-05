@@ -36,7 +36,7 @@ void FeaturesSelection::selection()
 	size_t mapsize = _strmap.size(); 
 	cout << mapsize << endl;
 	string dummy[mapsize + 1]; 
-	memset(dummy, sizeof(dummy), 0);
+	memset(dummy, 0, sizeof(dummy));
 	map<string, size_t>::iterator it = _strmap.begin();
 	for(; it != _strmap.end(); ++it)
 		dummy[it->second] = it->first;
@@ -74,7 +74,7 @@ void FeaturesSelection::save()
 	fprintf(ofs, "solver_type L1R_LR\n");
 	fprintf(ofs, "nr_class 2\n");
 	fprintf(ofs, "label 1 2\n");
-	fprintf(ofs, "nr_feature %d\n", new_strmap.size());
+	fprintf(ofs, "nr_feature %d\n", (int)new_strmap.size());
 	fprintf(ofs, "bias -1\n");
 	fprintf(ofs, "w\n");
 

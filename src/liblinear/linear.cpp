@@ -2632,12 +2632,15 @@ struct model *load_model(const char *model_file_name)
 	setlocale(LC_ALL, "C");
 
 	char cmd[81];
+    int ret __attribute__((unused));
 	while(1)
 	{
-		fscanf(fp,"%80s",cmd);
+		ret = fscanf(fp,"%80s",cmd);
+        (void)ret;
 		if(strcmp(cmd,"solver_type")==0)
 		{
-			fscanf(fp,"%80s",cmd);
+			ret = fscanf(fp,"%80s",cmd);
+            (void)ret;
 			int i;
 			for(i=0;solver_type_table[i];i++)
 			{
@@ -2660,17 +2663,20 @@ struct model *load_model(const char *model_file_name)
 		}
 		else if(strcmp(cmd,"nr_class")==0)
 		{
-			fscanf(fp,"%d",&nr_class);
+			ret = fscanf(fp,"%d",&nr_class);
+            (void)ret;
 			model_->nr_class=nr_class;
 		}
 		else if(strcmp(cmd,"nr_feature")==0)
 		{
-			fscanf(fp,"%d",&nr_feature);
+			ret = fscanf(fp,"%d",&nr_feature);
+            (void)ret;
 			model_->nr_feature=nr_feature;
 		}
 		else if(strcmp(cmd,"bias")==0)
 		{
-			fscanf(fp,"%lf",&bias);
+			ret = fscanf(fp,"%lf",&bias);
+            (void)ret;
 			model_->bias=bias;
 		}
 		else if(strcmp(cmd,"w")==0)
@@ -2681,8 +2687,10 @@ struct model *load_model(const char *model_file_name)
 		{
 			int nr_class = model_->nr_class;
 			model_->label = Malloc(int,nr_class);
-			for(int i=0;i<nr_class;i++)
-				fscanf(fp,"%d",&model_->label[i]);
+			for(int i=0;i<nr_class;i++) {
+				ret = fscanf(fp,"%d",&model_->label[i]);
+                (void)ret;
+            }
 		}
 		else
 		{
@@ -2711,9 +2719,12 @@ struct model *load_model(const char *model_file_name)
 	for(i=0; i<w_size; i++)
 	{
 		int j;
-		for(j=0; j<nr_w; j++)
-			fscanf(fp, "%lf ", &model_->w[i*nr_w+j]);
-		fscanf(fp, "\n");
+		for(j=0; j<nr_w; j++) {
+			ret = fscanf(fp, "%lf ", &model_->w[i*nr_w+j]);
+            (void)ret;
+        }
+		ret = fscanf(fp, "\n");
+        (void)ret;
 	}
 	
 	setlocale(LC_ALL, old_locale);

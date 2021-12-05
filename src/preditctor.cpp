@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 
 	cout << "End segmenting." << endl;
 	finish = clock();
-	printf("Segment %d line(s). \n", number_lines);
+	printf("Segment %d line(s). \n", (int)number_lines);
 	printf("Segmentation took %f seconds to execute\n",
 	         ((double) (finish - start)) / CLOCKS_PER_SEC); //
 
